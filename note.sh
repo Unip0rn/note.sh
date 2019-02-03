@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+# This is note.sh, a shell script to maintain an unordered list of of notes from CLI.
+# Copyright (C) 2019 Nils Stratmann
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+# 
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
 global_variables() {
     [[ -z $NOTE_STORE ]] && note_store="$HOME/.notes" || note_store=$NOTE_STORE
     tmp_dir="/tmp"
