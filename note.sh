@@ -109,7 +109,7 @@ do_main() {
     variables_check
 
     case $1 in
-        "list")
+        "list"|"ls")
             for i in $(cat $note_store | grep -P '^<note ([0-9])*>$' | sed -e 's/<note //g' -e 's/>//g' | sort -n); do
                     
                 tmp=$(cat $note_store | grep -A 2 -P "^<note $i>$")
@@ -167,7 +167,7 @@ $(cat $tmp_file)
 __EOF__
             ;;
 
-        "delete")
+        "delete"|"rm")
             tmp=$(cat $note_store | grep -A 2 -P "^<note $2>$")
             title=$(echo $tmp | sed -e 's/<note [0-9]*> date:[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9:]\{8\} title:\( \)\?//g')
             ts=$(echo $tmp | awk -F'date:' '{print $2}' | awk -F' title:' '{print $1}' | tr _ " ")
