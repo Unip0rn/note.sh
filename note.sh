@@ -168,7 +168,7 @@ __EOF__
             ;;
 
         "delete")
-            tmp=$(cat $note_store | grep -A 2 -P "^<note $i>$")
+            tmp=$(cat $note_store | grep -A 2 -P "^<note $2>$")
             title=$(echo $tmp | sed -e 's/<note [0-9]*> date:[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9:]\{8\} title:\( \)\?//g')
             ts=$(echo $tmp | awk -F'date:' '{print $2}' | awk -F' title:' '{print $1}' | tr _ " ")
             echo "You are about to delete note $2 with title: \"$title\", last edited on $ts."
@@ -184,7 +184,7 @@ $(cat $before)
 $(cat $after)
 __EOF__
             rm $before $after
-            echo 
+            echo "deleted note $2."
             ;;
 
         *)
