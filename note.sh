@@ -68,7 +68,7 @@ get_tmp_file() {
 }
 
 check_param() {
-    [[ $(echo $1 | grep '^[0-9]+$') ]] || warn "You need to specify the numeric id of the note you wish to edit, FOUND: $1."
+    [[ $(echo $1 | grep -P '^[0-9]+$') ]] || warn "You need to specify the numeric id of the note you wish to edit, FOUND: $1."
     [[ $(cat $note_store | grep "^<note $1>$") ]] || warn "This note does not exist."
 
 }
@@ -110,6 +110,7 @@ do_main() {
 
     case $1 in
         "list"|"ls")
+            # use blank IDs, not the whole line
             for i in $(cat $note_store | grep -P '^<note ([0-9])+>$' | sed -e 's/<note //g' -e 's/>//g' | sort -n); do
                     
                 tmp=$(cat $note_store | grep -A 2 -P "^<note $i>$")
@@ -117,7 +118,7 @@ do_main() {
                 ## here I would like to make it more simple 
                 ## but I cannot negat the possibility of "title: " being part 
                 ## of the title
-                title=$(echo $tmp | sed -e 's/<note [0-9]+> date:[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9:]\{8\} title:\( \)\?//g')
+                title=$(echo $tmp | sed -e 's/^<note [0-9]\+> date:[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9:]\{8\} title:\( \)\?//g')
                 time_stamp=$(echo $tmp | awk -F'date:' '{print $2}' | awk -F' title:' '{print $1}' | tr _ " ")
                 
                 echo "$i ($time_stamp): $title"
