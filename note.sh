@@ -85,12 +85,17 @@ note.sh usage
 note take
     opens \$EDITOR to let you take a note and gives it some metadata to help you find it later.
 note list
+     ls
     list notes in noteStore by id, last modification and title.
 note view n
+     show n
     view note from noteStore with id n with \$PAGER.
+note cat n
+    print note with id n to stdout.
 note edit n
     edit note from noteStore with id n with \$EDITOR.
 note delete n
+     rm n
     delete note from noteStore with id n.
 note [anything else]
     print this help-message.
@@ -130,6 +135,9 @@ do_main() {
             get_note_by_id $2 | $PAGER
             ;;
 
+        "cat")
+            get_note_by_id $2
+            ;;
         "edit")
             tmp_file=$(get_tmp_file)
             get_note_by_id $2 | tail -n +2 > $tmp_file || (rm $tmp_file && error 'error doing stuff about get_note_by_id and stuffing it into your $tmp_dir, '$tmp_dir.)
