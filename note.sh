@@ -124,7 +124,7 @@ do_main() {
             done
             ;;
 
-        "view") ## note.sh view <n> to show note with id n
+        "view"|"show") ## note.sh view <n> to show note with id n
             # make sure $2 is o.k.
             get_note_by_id $2 | $PAGER
             ;;

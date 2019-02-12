@@ -8,6 +8,7 @@ note list
 note take
     open $EDITOR and add the note to $note_store
 note view <n>
+     show <n>
     view note with id n in $PAGER
 note edit <n>
     opens note with id n in $EDITOR and updates some metadata
